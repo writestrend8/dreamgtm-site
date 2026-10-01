@@ -1,0 +1,436 @@
+/* Agentic Content OS™ — page components
+   Extends the existing DreamGTM design system only.
+   Tokens, buttons, radii and spacing all come from theme.css.
+   Nothing here introduces a new visual style: every colour, radius and
+   motion curve is one already used on discovery-sprint.html.
+   Only the system diagrams (OS panel, layer stack, stage loop, chain)
+   are new; everything else on the page reuses ds-* components. */
+
+@layer components {
+
+    /* ---------- Micro label used inside the system diagrams ---------- */
+    .ac-label {
+        font: 700 10px/1 'Inter', sans-serif;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        margin-bottom: 12px
+    }
+
+    /* ---------- Hero: the content operating system ---------- */
+    .ac-os {
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        box-shadow: 0 25px 50px -12px rgba(1, 69, 80, .18);
+        overflow: hidden
+    }
+
+    .ac-os__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 22px;
+        background: #014550;
+        color: #fff
+    }
+
+    .ac-os__name {
+        font: 700 12px/1 'Inter', sans-serif;
+        letter-spacing: .16em;
+        text-transform: uppercase
+    }
+
+    .ac-os__status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font: 600 11px/1 'Inter', sans-serif;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #dfff88
+    }
+
+    .ac-os__dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 9999px;
+        background: #dfff88;
+        flex-shrink: 0
+    }
+
+    .ac-os__body {
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px
+    }
+
+    .ac-os__nodes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px
+    }
+
+    .ac-node {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font: 500 12px/1.4 'Inter', sans-serif;
+        border-radius: 9999px;
+        padding: 7px 13px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        color: #334155
+    }
+
+    .ac-node .material-symbols-outlined {
+        font-size: 15px;
+        flex-shrink: 0
+    }
+
+    /* agent capability inside the system */
+    .ac-node--ai {
+        background: rgba(223, 255, 136, .35);
+        border-color: rgba(223, 255, 136, .9);
+        color: #014550
+    }
+
+    /* human decision point — the control surface of the system */
+    .ac-node--human {
+        background: #014550;
+        border-color: #014550;
+        color: #fff
+    }
+
+    .ac-os__jump {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #cbd5e1;
+        padding-left: 2px
+    }
+
+    .ac-os__jump .material-symbols-outlined {
+        font-size: 18px
+    }
+
+    .ac-os__loop {
+        border-top: 1px solid #e2e8f0;
+        background: #f8fafc;
+        padding: 16px 22px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px
+    }
+
+    .ac-os__loop p {
+        font: 400 13px/1.6 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    .ac-os__loop .material-symbols-outlined {
+        font-size: 18px;
+        color: #014550;
+        flex-shrink: 0
+    }
+
+    /* ---------- Layered system stack ---------- */
+    .ac-stack {
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px
+    }
+
+    @media(min-width:768px) {
+        .ac-stack {
+            padding: 28px
+        }
+    }
+
+    .ac-stack__layer {
+        border-radius: 14px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        padding: 16px 18px
+    }
+
+    .ac-stack__top {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px 12px;
+        margin-bottom: 10px
+    }
+
+    .ac-stack__name {
+        font: 700 14px/1.3 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a
+    }
+
+    .ac-stack__role {
+        font: 700 10px/1 'Inter', sans-serif;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: #94a3b8
+    }
+
+    /* ---------- Stage loop: one workflow stage, with AI + human roles ---------- */
+    .ac-loop {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr
+    }
+
+    @media(min-width:640px) {
+        .ac-loop {
+            grid-template-columns: repeat(2, minmax(0, 1fr))
+        }
+    }
+
+    @media(min-width:1024px) {
+        .ac-loop {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px
+        }
+    }
+
+    .ac-stage {
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        transition: transform .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s, border-color .3s
+    }
+
+    .ac-stage:hover {
+        transform: translateY(-4px);
+        border-color: #cbd5e1;
+        box-shadow: 0 20px 40px -20px rgba(1, 69, 80, .25)
+    }
+
+    .ac-stage__n {
+        font: 700 10px/1 'Inter', sans-serif;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        margin-bottom: 10px
+    }
+
+    .ac-stage__title {
+        font: 700 16px/1.3 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 6px
+    }
+
+    .ac-stage__body {
+        font: 400 13px/1.6 'Inter', sans-serif;
+        color: #64748b;
+        margin-bottom: 16px
+    }
+
+    .ac-stage__roles {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid #f1f5f9
+    }
+
+    .ac-role {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        font: 400 12px/1.55 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    .ac-role__tag {
+        flex-shrink: 0;
+        display: inline-block;
+        font: 700 9px/1 'Inter', sans-serif;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: 5px 8px;
+        border-radius: 9999px;
+        white-space: nowrap
+    }
+
+    .ac-role__tag--ai {
+        background: rgba(223, 255, 136, .35);
+        color: #014550
+    }
+
+    .ac-role__tag--human {
+        background: rgba(1, 69, 80, .08);
+        color: #014550
+    }
+
+    .ac-loop__return {
+        grid-column: 1 / -1;
+        border-radius: 14px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        padding: 16px 18px;
+        display: flex;
+        align-items: center;
+        gap: 12px
+    }
+
+    .ac-loop__return p {
+        font: 400 13px/1.6 'Inter', sans-serif;
+        color: #475569
+    }
+
+    .ac-loop__return .material-symbols-outlined {
+        font-size: 20px;
+        color: #014550;
+        flex-shrink: 0
+    }
+
+    /* ---------- Agent card footer: the operator control line ---------- */
+    .ac-agent__foot {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid #f1f5f9
+    }
+
+    /* ---------- Horizontal chain (ordered sequence of stages) ----------
+       Arbitrary child count, so the tracks are breakpoint-based rather
+       than a fixed number of columns like ds-flow.
+       <768px  : 1 column, arrows rotate to point down
+       768px+  : arrows hidden, two columns
+       1024px+ : three columns */
+    .ac-chain {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr
+    }
+
+    .ac-chain__node {
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 20px;
+        height: 100%;
+        transition: transform .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s, border-color .3s
+    }
+
+    .ac-chain__node:hover {
+        transform: translateY(-4px);
+        border-color: #cbd5e1;
+        box-shadow: 0 20px 40px -20px rgba(1, 69, 80, .25)
+    }
+
+    .ac-chain__node--on {
+        background: #014550;
+        border-color: #014550
+    }
+
+    .ac-chain__node--on:hover {
+        border-color: #014550;
+        box-shadow: 0 20px 40px -20px rgba(1, 69, 80, .35)
+    }
+
+    .ac-chain__node--next {
+        border-color: #dfff88;
+        background: rgba(223, 255, 136, .22)
+    }
+
+    .ac-chain__step {
+        font: 700 10px/1 'Inter', sans-serif;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        margin-bottom: 10px
+    }
+
+    .ac-chain__node--on .ac-chain__step {
+        color: #dfff88
+    }
+
+    .ac-chain__node--next .ac-chain__step {
+        color: #014550
+    }
+
+    .ac-chain__title {
+        font: 700 15px/1.35 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 6px
+    }
+
+    .ac-chain__node--on .ac-chain__title {
+        color: #fff
+    }
+
+    .ac-chain__body {
+        font: 400 13px/1.55 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    .ac-chain__node--on .ac-chain__body {
+        color: rgba(255, 255, 255, .78)
+    }
+
+    /* the signal each stage produces — how content is read as demand */
+    .ac-chain__signal {
+        margin-top: 12px;
+        padding-top: 12px;
+        border-top: 1px solid #f1f5f9;
+        font: 700 10px/1.5 'Inter', sans-serif;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #94a3b8
+    }
+
+    .ac-chain__node--on .ac-chain__signal {
+        border-top-color: rgba(255, 255, 255, .2)
+    }
+
+    .ac-chain__arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #cbd5e1;
+        transform: rotate(90deg)
+    }
+
+    .ac-chain__arrow .material-symbols-outlined {
+        font-size: 20px
+    }
+
+    @media(min-width:768px) {
+        .ac-chain {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px
+        }
+
+        .ac-chain__arrow {
+            display: none
+        }
+    }
+
+    @media(min-width:1024px) {
+        .ac-chain {
+            grid-template-columns: repeat(3, minmax(0, 1fr))
+        }
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    .ac-stage,
+    .ac-chain__node {
+        transition: none
+    }
+}
