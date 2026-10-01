@@ -1,0 +1,710 @@
+/* DreamGTM vs GrowthX — page components
+    Extends the existing DreamGTM design system only.
+    Tokens, buttons, radii and spacing all come from theme.css.
+    Nothing here introduces a new visual style: every colour, radius and
+    motion curve is one already used on discovery-sprint.html.
+    Only the comparison components are new — the section flow follows the
+    reference comparison layout (overview, side-by-side cards, feature
+    matrix, numbered blocks, choose-panels, alternatives, disclaimer)
+    rendered with DreamGTM's own palette and ds-* components. */
+
+@layer components {
+
+    /* ---------- Chips used as in-page jump links
+       (ds-chip is only used on <span> elsewhere in the site, so the
+       interactive state is declared here rather than borrowed) ---------- */
+    .cmp-chip-link {
+        transition: color .2s, border-color .2s, background .2s
+    }
+
+    .cmp-chip-link:hover {
+        color: #014550;
+        border-color: rgba(1, 69, 80, .3);
+        background: rgba(1, 69, 80, .06)
+    }
+
+    .cmp-chip-link:focus-visible {
+        outline: 2px solid #014550;
+        outline-offset: 2px
+    }
+
+    /* ---------- Section header block
+       The eyebrow, H2 and tagline that open every section. Centred as one
+       block, so the reader's eye always lands on the same axis and the
+       content below starts from a shared left edge. The block centres
+       itself in its container (max-w-3xl inside max-w-7xl) and text-wrap
+       keeps the title and tagline from breaking awkwardly. ---------- */
+    .cmp-head {
+        margin-inline: auto;
+        text-align: center
+    }
+
+    .cmp-head h2 {
+        text-wrap: balance
+    }
+
+    .cmp-head p {
+        text-wrap: pretty
+    }
+
+    /* ---------- Hero credibility strip
+       A thin ruled row under the CTAs, matching the reference layout's
+       trust line. Uses the accent rule already used by ds-value. ---------- */
+    .cmp-trust {
+        margin-top: 40px;
+        padding-top: 28px;
+        border-top: 1px solid #e2e8f0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        text-align: left
+    }
+
+    @media(min-width:768px) {
+        .cmp-trust {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 28px
+        }
+    }
+
+    .cmp-trust__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px
+    }
+
+    .cmp-trust__item .material-symbols-outlined {
+        font-size: 18px;
+        color: #014550;
+        flex-shrink: 0
+    }
+
+    .cmp-trust__text {
+        font: 500 13px/1.6 'Inter', sans-serif;
+        color: #475569
+    }
+
+    .cmp-trust__text strong {
+        display: block;
+        font: 700 14px/1.4 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a
+    }
+
+    /* ---------- Overview prose blocks
+       "What is GrowthX?" / "What is DreamGTM?" — each a titled block of
+       running prose, the way the reference layout introduces both sides. ---------- */
+    .cmp-overview {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px
+    }
+
+    @media(min-width:1024px) {
+        .cmp-overview {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 32px 56px
+        }
+    }
+
+    .cmp-overview__block {
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 28px
+    }
+
+    @media(min-width:768px) {
+        .cmp-overview__block {
+            padding: 36px
+        }
+    }
+
+    .cmp-overview__block--dgtm {
+        border-color: rgba(1, 69, 80, .22);
+        background: rgba(1, 69, 80, .03)
+    }
+
+    .cmp-overview__name {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font: 700 11px/1 'Inter', sans-serif;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        border-radius: 9999px;
+        padding: 7px 13px;
+        margin-bottom: 16px;
+        background: #f1f5f9;
+        color: #475569
+    }
+
+    .cmp-overview__block--dgtm .cmp-overview__name {
+        background: rgba(1, 69, 80, .1);
+        color: #014550
+    }
+
+    .cmp-overview__name .material-symbols-outlined {
+        font-size: 15px
+    }
+
+    .cmp-overview__title {
+        font: 700 21px/1.3 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 14px
+    }
+
+    .cmp-overview__body {
+        font: 400 15px/1.7 'Inter', sans-serif;
+        color: #475569
+    }
+
+    .cmp-overview__body + .cmp-overview__body {
+        margin-top: 14px
+    }
+
+    .cmp-overview__fit {
+        margin-top: 16px;
+        padding-top: 16px;
+        border-top: 1px dashed #e2e8f0;
+        font: 400 14px/1.65 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    .cmp-overview__block--dgtm .cmp-overview__fit {
+        border-top-color: rgba(1, 69, 80, .16)
+    }
+
+    .cmp-overview__fit strong {
+        color: #014550;
+        font-weight: 700
+    }
+
+    /* ---------- How they compare: two side-by-side cards
+       Header bar per column, then a list of icon + title + prose rows.
+       The DreamGTM column carries the accent rule so the reader can scan
+       one side — a reading aid, not a score. ---------- */
+    .cmp-versus {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px
+    }
+
+    @media(min-width:768px) {
+        .cmp-versus {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px
+        }
+    }
+
+    .cmp-versus__col {
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        overflow: hidden;
+        height: 100%;
+        transition: transform .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s, border-color .3s
+    }
+
+    .cmp-versus__col:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 40px -20px rgba(1, 69, 80, .25)
+    }
+
+    .cmp-versus__col--dgtm {
+        border-color: rgba(1, 69, 80, .25)
+    }
+
+    .cmp-versus__head {
+        padding: 20px 28px;
+        background: #1f2b2c;
+        color: #fff;
+        font: 700 17px/1.3 'Plus Jakarta Sans', sans-serif;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px
+    }
+
+    .cmp-versus__col--dgtm .cmp-versus__head {
+        background: #014550;
+        color: #dfff88
+    }
+
+    .cmp-versus__badge {
+        font: 700 10px/1 'Inter', sans-serif;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        border-radius: 9999px;
+        padding: 6px 11px;
+        background: rgba(255, 255, 255, .16);
+        color: #fff
+    }
+
+    .cmp-versus__col--dgtm .cmp-versus__badge {
+        background: #dfff88;
+        color: #014550
+    }
+
+    .cmp-versus__body {
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px
+    }
+
+    .cmp-versus__row {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px
+    }
+
+    .cmp-versus__ico {
+        flex-shrink: 0;
+        width: 24px;
+        height: 24px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f1f5f9;
+        color: #64748b
+    }
+
+    .cmp-versus__ico .material-symbols-outlined {
+        font-size: 15px
+    }
+
+    .cmp-versus__col--dgtm .cmp-versus__ico {
+        background: rgba(223, 255, 136, .35);
+        color: #014550
+    }
+
+    .cmp-versus__name {
+        font: 700 14.5px/1.4 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 5px
+    }
+
+    .cmp-versus__text {
+        font: 400 13.5px/1.65 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    /* ---------- Feature-by-feature matrix
+       Dark three-column grid on the brand background: a capability label
+       column plus one marked cell per vendor. Built as a grid rather than
+       a <table> because every data cell carries an icon + short label, not
+       prose; the row/column relationship is exposed to assistive tech
+       through the row labels and the caption instead. ---------- */
+    .cmp-matrix {
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        padding-bottom: 4px
+    }
+
+    .cmp-matrix__grid {
+        margin: 0 auto;
+        max-width: 880px;
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, .1);
+        background: #0d2a2c;
+        display: grid;
+        grid-template-columns: minmax(190px, 1.9fr) minmax(112px, 1fr) minmax(112px, 1fr)
+    }
+
+    .cmp-matrix__head {
+        display: flex;
+        align-items: flex-end;
+        padding: 20px 24px 16px;
+        font: 700 11px/1.4 'Inter', sans-serif;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .38)
+    }
+
+    .cmp-matrix__head--brand {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        letter-spacing: .04em;
+        font: 700 15px/1.3 'Plus Jakarta Sans', sans-serif;
+        text-transform: none;
+        color: rgba(255, 255, 255, .8)
+    }
+
+    .cmp-matrix__grid .cmp-matrix__head--dgtm {
+        background: rgba(223, 255, 136, .13);
+        border-left: 1px solid rgba(223, 255, 136, .3);
+        border-right: 1px solid rgba(223, 255, 136, .3);
+        border-top: 1px solid rgba(223, 255, 136, .3);
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        color: #dfff88
+    }
+
+    .cmp-matrix__cap {
+        display: flex;
+        align-items: center;
+        padding: 15px 24px;
+        border-top: 1px solid rgba(255, 255, 255, .07);
+        font: 500 14px/1.4 'Plus Jakarta Sans', sans-serif;
+        color: rgba(255, 255, 255, .85)
+    }
+
+    .cmp-matrix__mark {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px 12px;
+        border-top: 1px solid rgba(255, 255, 255, .07);
+        font: 500 12.5px/1.35 'Inter', sans-serif;
+        text-align: center
+    }
+
+    .cmp-matrix__grid .cmp-matrix__mark--dgtm {
+        background: rgba(223, 255, 136, .06);
+        border-left: 1px solid rgba(223, 255, 136, .3);
+        border-right: 1px solid rgba(223, 255, 136, .3);
+        color: rgba(255, 255, 255, .92)
+    }
+
+    .cmp-matrix__mark .material-symbols-outlined {
+        font-size: 19px;
+        width: 19px;
+        height: 19px
+    }
+
+    .cmp-matrix__mark--yes {
+        color: #dfff88
+    }
+
+    .cmp-matrix__mark--partial {
+        gap: 8px;
+        color: rgba(255, 255, 255, .58)
+    }
+
+    .cmp-matrix__mark--partial .material-symbols-outlined {
+        color: rgba(255, 255, 255, .45)
+    }
+
+    .cmp-matrix__mark--none {
+        color: rgba(255, 255, 255, .32)
+    }
+
+    /* Matrix legend, so the three marks are unambiguous */
+    .cmp-matrix__legend {
+        margin-top: 22px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 28px
+    }
+
+    .cmp-matrix__legend-item {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        font: 400 12.5px/1.6 'Inter', sans-serif;
+        color: rgba(255, 255, 255, .6)
+    }
+
+    .cmp-matrix__legend-item .material-symbols-outlined {
+        font-size: 17px;
+        width: 17px;
+        height: 17px
+    }
+
+    .cmp-matrix__legend-item--yes .material-symbols-outlined {
+        color: #dfff88
+    }
+
+    .cmp-matrix__legend-item--partial .material-symbols-outlined {
+        color: rgba(255, 255, 255, .5)
+    }
+
+    .cmp-matrix__legend-item--none .material-symbols-outlined {
+        color: rgba(255, 255, 255, .32)
+    }
+
+    /* ---------- Numbered narrative blocks (01 / 02 / 03) ---------- */
+    .cmp-num {
+        display: grid;
+        gap: 32px
+    }
+
+    @media(min-width:1024px) {
+        .cmp-num {
+            gap: 40px
+        }
+    }
+
+    .cmp-num__item {
+        display: grid;
+        gap: 16px
+    }
+
+    @media(min-width:768px) {
+        .cmp-num__item {
+            grid-template-columns: 64px minmax(0, 1fr);
+            gap: 24px;
+            align-items: start
+        }
+    }
+
+    .cmp-num__badge {
+        font: 800 26px/1 'Plus Jakarta Sans', sans-serif;
+        letter-spacing: -.02em;
+        color: rgba(1, 69, 80, .16);
+        padding-top: 4px
+    }
+
+    .cmp-num__title {
+        font: 700 19px/1.35 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 10px
+    }
+
+    .cmp-num__body {
+        font: 400 15px/1.7 'Inter', sans-serif;
+        color: #475569
+    }
+
+    .cmp-num__body + .cmp-num__body {
+        margin-top: 12px
+    }
+
+    /* ---------- Choose-the-right-approach panels
+       Two bulleted lists, one per option. Neutral chrome on both so the
+       choice reads as a decision the reader makes, not a verdict. ---------- */
+    .cmp-choose {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 24px
+    }
+
+    @media(min-width:768px) {
+        .cmp-choose {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px
+        }
+    }
+
+    .cmp-choose__panel {
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 28px;
+        display: flex;
+        flex-direction: column;
+        height: 100%
+    }
+
+    @media(min-width:768px) {
+        .cmp-choose__panel {
+            padding: 34px
+        }
+    }
+
+    .cmp-choose__panel--dgtm {
+        border-color: rgba(1, 69, 80, .25);
+        border-top: 3px solid #014550
+    }
+
+    .cmp-choose__label {
+        font: 700 11px/1 'Inter', sans-serif;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: #64748b;
+        margin-bottom: 12px
+    }
+
+    .cmp-choose__panel--dgtm .cmp-choose__label {
+        color: #014550
+    }
+
+    .cmp-choose__title {
+        font: 700 20px/1.3 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 10px
+    }
+
+    .cmp-choose__body {
+        font: 400 14px/1.65 'Inter', sans-serif;
+        color: #64748b;
+        margin-bottom: 22px
+    }
+
+    .cmp-choose__list {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-top: auto
+    }
+
+    .cmp-choose__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font: 400 13.5px/1.6 'Inter', sans-serif;
+        color: #475569
+    }
+
+    .cmp-choose__item .material-symbols-outlined {
+        font-size: 16px;
+        color: #94a3b8;
+        flex-shrink: 0;
+        margin-top: 1px
+    }
+
+    .cmp-choose__panel--dgtm .cmp-choose__item .material-symbols-outlined {
+        color: #014550
+    }
+
+    /* ---------- Alternatives list
+       Honest one-liners about adjacent tools, with outbound links. ---------- */
+    .cmp-alt {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px
+    }
+
+    @media(min-width:768px) {
+        .cmp-alt {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px
+        }
+    }
+
+    .cmp-alt__item {
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 22px 24px;
+        transition: transform .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s, border-color .3s
+    }
+
+    .cmp-alt__item:hover {
+        transform: translateY(-3px);
+        border-color: rgba(1, 69, 80, .22);
+        box-shadow: 0 18px 36px -22px rgba(1, 69, 80, .3)
+    }
+
+    .cmp-alt__name {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 10px;
+        font: 700 16px/1.35 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 8px
+    }
+
+    .cmp-alt__name a {
+        color: inherit;
+        transition: color .2s
+    }
+
+    .cmp-alt__name a:hover {
+        color: #014550
+    }
+
+    .cmp-alt__name a:focus-visible {
+        outline: 2px solid #014550;
+        outline-offset: 3px;
+        border-radius: 3px
+    }
+
+    .cmp-alt__body {
+        font: 400 13.5px/1.65 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    /* ---------- Three-step process (getting started)
+       ds-timeline is a five-column component; this pins the same markup
+       to three columns so the steps read as a sequence, not a phase grid. ---------- */
+    .cmp-steps {
+        display: grid;
+        gap: 0;
+        grid-template-columns: 1fr
+    }
+
+    @media(min-width:1024px) {
+        .cmp-steps {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px
+        }
+    }
+
+    /* ---------- About-this-comparison disclaimer ---------- */
+    .cmp-about {
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        border-left: 3px solid #014550;
+        background: #fff;
+        padding: 28px
+    }
+
+    @media(min-width:768px) {
+        .cmp-about {
+            padding: 32px 36px
+        }
+    }
+
+    .cmp-about__body {
+        font: 400 13.5px/1.75 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    .cmp-about__body + .cmp-about__body {
+        margin-top: 10px
+    }
+
+    /* ---------- Dark-background variant of the ds-* process timeline,
+       for the DreamGTM Method on bg-primary ---------- */
+    .cmp-step__title {
+        color: #fff
+    }
+
+    .cmp-step__body {
+        color: rgba(255, 255, 255, .75)
+    }
+
+    /* ---------- Source notes ---------- */
+    .cmp-note {
+        margin-top: 18px;
+        font: 400 12px/1.7 'Inter', sans-serif;
+        color: #64748b;
+        max-width: 78ch
+    }
+
+    .cmp-note a {
+        color: #014550;
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        transition: color .2s
+    }
+
+    .cmp-note a:hover {
+        color: #025663
+    }
+
+    .cmp-note--on-dark {
+        color: rgba(255, 255, 255, .6)
+    }
+
+    .cmp-note--on-dark a {
+        color: #dfff88
+    }
+
+    .cmp-note--on-dark a:hover {
+        color: #fff
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    .cmp-versus__col,
+    .cmp-alt__item {
+        transition: none
+    }
+}
