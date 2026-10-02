@@ -1,0 +1,762 @@
+/* Pipeline Acceleration™ — page components
+   Extends the existing DreamGTM design system only.
+   Tokens, buttons, radii, spacing and motion all come from theme.css,
+   gtm.css and discovery.css. Every colour, radius, curve and type ramp
+   below is already in use on discovery-sprint.html, demand-flow.html
+   and agentic-content-os.html.
+   Only the pipeline-system diagrams are new: the hero signal board,
+   the ICP-to-revenue chain, the conversion funnel and the AI/human
+   split rows. Everything else on the page reuses ds-* components. */
+
+@layer components {
+
+    /* ---------- Micro label used inside the system diagrams ---------- */
+    .pa-label {
+        font: 700 10px/1 'Inter', sans-serif;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        margin-bottom: 12px
+    }
+
+    /* ---------- Table zebra row (theme.css has no slate opacity modifier) ---------- */
+    .pa-table__alt {
+        background: #f8fafc
+    }
+
+    /* ---------- Hero: the signal board ---------- */
+    .pa-panel {
+        border-radius: 20px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        box-shadow: 0 25px 50px -12px rgba(1, 69, 80, .18);
+        overflow: hidden
+    }
+
+    .pa-panel__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 22px;
+        background: #014550;
+        color: #fff
+    }
+
+    .pa-panel__name {
+        font: 700 12px/1 'Inter', sans-serif;
+        letter-spacing: .16em;
+        text-transform: uppercase
+    }
+
+    .pa-panel__status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font: 600 11px/1 'Inter', sans-serif;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        color: #dfff88
+    }
+
+    .pa-panel__dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 9999px;
+        background: #dfff88;
+        flex-shrink: 0
+    }
+
+    .pa-panel__body {
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 18px
+    }
+
+    /* the pipeline spine — every stage carries the signal it produces */
+    .pa-stages {
+        display: grid;
+        gap: 8px;
+        grid-template-columns: 1fr
+    }
+
+    @media(min-width:640px) {
+        .pa-stages {
+            grid-template-columns: repeat(2, minmax(0, 1fr))
+        }
+    }
+
+    @media(min-width:1024px) {
+        .pa-stages {
+            grid-template-columns: repeat(3, minmax(0, 1fr))
+        }
+    }
+
+    .pa-stage {
+        border-radius: 14px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        padding: 14px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px
+    }
+
+    .pa-stage--on {
+        background: rgba(223, 255, 136, .35);
+        border-color: rgba(223, 255, 136, .9)
+    }
+
+    .pa-stage--out {
+        background: #014550;
+        border-color: #014550
+    }
+
+    .pa-stage__n {
+        font: 700 10px/1 'Inter', sans-serif;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: #94a3b8
+    }
+
+    .pa-stage--on .pa-stage__n {
+        color: #014550
+    }
+
+    .pa-stage--out .pa-stage__n {
+        color: #dfff88
+    }
+
+    .pa-stage__name {
+        font: 700 15px/1.3 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a
+    }
+
+    .pa-stage--out .pa-stage__name {
+        color: #fff
+    }
+
+    .pa-stage__signal {
+        font: 400 12px/1.55 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    .pa-stage--out .pa-stage__signal {
+        color: rgba(255, 255, 255, .72)
+    }
+
+    /* what the system runs on */
+    .pa-nodes {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px
+    }
+
+    .pa-node {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        font: 500 12px/1.4 'Inter', sans-serif;
+        border-radius: 9999px;
+        padding: 7px 13px;
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        color: #334155
+    }
+
+    .pa-node .material-symbols-outlined {
+        font-size: 15px;
+        flex-shrink: 0
+    }
+
+    /* human decision point — the control surface of the pipeline system */
+    .pa-node--human {
+        background: #014550;
+        border-color: #014550;
+        color: #fff
+    }
+
+    /* ---------- Loop strip: closes a panel and states a section note ---------- */
+    .pa-loop {
+        border-top: 1px solid #e2e8f0;
+        background: #f8fafc;
+        padding: 16px 22px;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px
+    }
+
+    .pa-loop p {
+        font: 400 13px/1.6 'Inter', sans-serif;
+        color: #64748b;
+        max-width: 82ch
+    }
+
+    .pa-loop .material-symbols-outlined {
+        font-size: 18px;
+        color: #014550;
+        flex-shrink: 0
+    }
+
+    /* standalone note variant, used between sections */
+    .pa-loop--note {
+        border: 1px solid #e2e8f0;
+        border-radius: 16px
+    }
+
+    /* loop strip on the primary background */
+    .pa-loop--dark {
+        border-top-color: rgba(255, 255, 255, .18);
+        background: rgba(255, 255, 255, .07)
+    }
+
+    .pa-loop--dark p {
+        color: rgba(255, 255, 255, .78)
+    }
+
+    .pa-loop--dark .material-symbols-outlined {
+        color: #dfff88
+    }
+
+    /* ---------- Highlighted service card (the one this page is about) ---------- */
+    .pa-card--on {
+        background: #014550;
+        border-color: #014550
+    }
+
+    .pa-card--on:hover {
+        border-color: #014550;
+        box-shadow: 0 20px 40px -20px rgba(1, 69, 80, .4)
+    }
+
+    .pa-card--on .ds-card__icon {
+        background: #dfff88;
+        color: #014550
+    }
+
+    .pa-card--on .ds-card__title {
+        color: #fff
+    }
+
+    .pa-card--on .ds-card__body {
+        color: rgba(255, 255, 255, .78)
+    }
+
+    .pa-card--on .ds-chip {
+        background: rgba(255, 255, 255, .1);
+        border-color: rgba(255, 255, 255, .2);
+        color: #dfff88
+    }
+
+    .pa-card__note {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid rgba(255, 255, 255, .18);
+        font: 400 13px/1.6 'Inter', sans-serif;
+        color: rgba(255, 255, 255, .85)
+    }
+
+    /* ---------- Ordered chain ----------
+       Node count varies by section, so the desktop track count is set by
+       a modifier (--7 for the pipeline system, --6 for the sequence).
+       Every breakpoint must state a track count that matches the visible
+       children at that size.
+       <768px  : 1 column, arrows rotate to point down
+       768px+  : 2 columns, arrows hidden (no room between wrapped cards)
+       1024px+ : 4 columns
+       1280px+ : single row with explicit tracks, connectors shown again */
+    .pa-chain {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr
+    }
+
+    .pa-chain__node {
+        position: relative;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 20px;
+        height: 100%;
+        transition: transform .3s cubic-bezier(.22, 1, .36, 1), box-shadow .3s, border-color .3s
+    }
+
+    .pa-chain__node:hover {
+        transform: translateY(-4px);
+        border-color: #cbd5e1;
+        box-shadow: 0 20px 40px -20px rgba(1, 69, 80, .25)
+    }
+
+    .pa-chain__node--on {
+        background: #014550;
+        border-color: #014550
+    }
+
+    .pa-chain__node--on:hover {
+        border-color: #014550;
+        box-shadow: 0 20px 40px -20px rgba(1, 69, 80, .4)
+    }
+
+    .pa-chain__node--next {
+        border-color: #dfff88;
+        background: rgba(223, 255, 136, .22)
+    }
+
+    .pa-chain__node--out {
+        background: #014550;
+        border-color: #014550
+    }
+
+    .pa-chain__step {
+        font: 700 10px/1 'Inter', sans-serif;
+        letter-spacing: .16em;
+        text-transform: uppercase;
+        color: #94a3b8;
+        margin-bottom: 10px
+    }
+
+    .pa-chain__node--on .pa-chain__step,
+    .pa-chain__node--out .pa-chain__step {
+        color: #dfff88
+    }
+
+    .pa-chain__node--next .pa-chain__step {
+        color: #014550
+    }
+
+    .pa-chain__title {
+        font: 700 15px/1.35 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 6px
+    }
+
+    .pa-chain__node--on .pa-chain__title,
+    .pa-chain__node--out .pa-chain__title {
+        color: #fff
+    }
+
+    .pa-chain__body {
+        font: 400 13px/1.55 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    .pa-chain__node--on .pa-chain__body,
+    .pa-chain__node--out .pa-chain__body {
+        color: rgba(255, 255, 255, .75)
+    }
+
+    /* the signal each stage produces */
+    .pa-chain__signal {
+        margin-top: 14px;
+        padding-top: 12px;
+        border-top: 1px solid #f1f5f9;
+        font: 700 10px/1.5 'Inter', sans-serif;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #94a3b8
+    }
+
+    .pa-chain__node--next .pa-chain__signal {
+        color: #014550;
+        border-top-color: rgba(1, 69, 80, .2)
+    }
+
+    .pa-chain__node--on .pa-chain__signal,
+    .pa-chain__node--out .pa-chain__signal {
+        border-top-color: rgba(255, 255, 255, .2);
+        color: #dfff88
+    }
+
+    .pa-chain__arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #cbd5e1;
+        transform: rotate(90deg)
+    }
+
+    .pa-chain__arrow .material-symbols-outlined {
+        font-size: 20px
+    }
+
+    @media(min-width:768px) {
+        .pa-chain {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px
+        }
+
+        .pa-chain__arrow {
+            display: none
+        }
+    }
+
+    @media(min-width:1024px) {
+        .pa-chain {
+            grid-template-columns: repeat(4, minmax(0, 1fr))
+        }
+    }
+
+    @media(min-width:1280px) {
+        .pa-chain {
+            gap: 12px
+        }
+
+        .pa-chain--6 {
+            grid-template-columns: 1fr 18px 1fr 18px 1fr 18px 1fr 18px 1fr 18px 1fr
+        }
+
+        .pa-chain--7 {
+            grid-template-columns: 1fr 18px 1fr 18px 1fr 18px 1fr 18px 1fr 18px 1fr 18px 1fr
+        }
+
+        .pa-chain__arrow {
+            display: flex;
+            transform: none
+        }
+    }
+
+    /* ---------- Chain on the primary background ---------- */
+    .pa-chain--dark .pa-chain__node {
+        background: rgba(255, 255, 255, .07);
+        border-color: rgba(255, 255, 255, .18)
+    }
+
+    .pa-chain--dark .pa-chain__node:hover {
+        border-color: rgba(223, 255, 136, .5);
+        box-shadow: 0 20px 40px -20px rgba(0, 0, 0, .45)
+    }
+
+    .pa-chain--dark .pa-chain__title {
+        color: #fff
+    }
+
+    .pa-chain--dark .pa-chain__body {
+        color: rgba(255, 255, 255, .78)
+    }
+
+    .pa-chain--dark .pa-chain__step {
+        color: rgba(255, 255, 255, .5)
+    }
+
+    .pa-chain--dark .pa-chain__signal {
+        border-top-color: rgba(255, 255, 255, .18);
+        color: #dfff88
+    }
+
+    .pa-chain--dark .pa-chain__arrow {
+        color: rgba(255, 255, 255, .45)
+    }
+
+    /* the terminal node of the chain reads as the outcome */
+    .pa-chain--dark .pa-chain__node--out {
+        background: #dfff88;
+        border-color: #dfff88
+    }
+
+    .pa-chain--dark .pa-chain__node--out .pa-chain__step {
+        color: #014550
+    }
+
+    .pa-chain--dark .pa-chain__node--out .pa-chain__title {
+        color: #014550
+    }
+
+    .pa-chain--dark .pa-chain__node--out .pa-chain__body {
+        color: rgba(1, 69, 80, .85)
+    }
+
+    .pa-chain--dark .pa-chain__node--out .pa-chain__signal {
+        border-top-color: rgba(1, 69, 80, .25);
+        color: #014550
+    }
+
+    /* ---------- Conversion funnel ----------
+       The bar widths describe where a funnel is *supposed* to narrow.
+       They are set per row with --pa-w and carry no measured values. */
+    .pa-funnel {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr
+    }
+
+    .pa-funnel__row {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr;
+        align-items: center;
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        background: #fff;
+        padding: 18px
+    }
+
+    .pa-funnel__n {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 9999px;
+        background: #014550;
+        color: #fff;
+        font: 700 11px/1 'Plus Jakarta Sans', sans-serif;
+        flex-shrink: 0
+    }
+
+    .pa-funnel__name {
+        font: 700 16px/1.3 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 4px
+    }
+
+    .pa-funnel__desc {
+        font: 400 13px/1.6 'Inter', sans-serif;
+        color: #64748b;
+        max-width: 46ch
+    }
+
+    .pa-funnel__track {
+        height: 8px;
+        border-radius: 9999px;
+        background: #f1f5f9;
+        overflow: hidden
+    }
+
+    .pa-funnel__fill {
+        display: block;
+        height: 100%;
+        width: var(--pa-w, 100%);
+        background: #014550;
+        border-radius: 9999px
+    }
+
+    .pa-funnel__gate {
+        font: 400 13px/1.6 'Inter', sans-serif;
+        color: #475569;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 12px
+    }
+
+    .pa-funnel__gate b {
+        font-weight: 600;
+        color: #0f172a;
+        display: block;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 11px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+        margin-bottom: 3px
+    }
+
+    @media(min-width:768px) {
+        .pa-funnel__row {
+            grid-template-columns: 34px minmax(0, 1fr) minmax(0, 1fr);
+            gap: 14px 22px;
+            padding: 20px 22px
+        }
+
+        .pa-funnel__gate {
+            grid-column: 2 / -1
+        }
+    }
+
+    /* the terminal funnel stage is the commercial outcome */
+    .pa-funnel__row--out {
+        background: #dfff88;
+        border-color: #dfff88
+    }
+
+    .pa-funnel__row--out .pa-funnel__n {
+        background: #014550;
+        color: #fff
+    }
+
+    .pa-funnel__row--out .pa-funnel__name {
+        color: #014550
+    }
+
+    .pa-funnel__row--out .pa-funnel__desc,
+    .pa-funnel__row--out .pa-funnel__gate {
+        color: rgba(1, 69, 80, .85)
+    }
+
+    .pa-funnel__row--out .pa-funnel__gate {
+        border-top-color: rgba(1, 69, 80, .25)
+    }
+
+    .pa-funnel__row--out .pa-funnel__gate b {
+        color: #014550
+    }
+
+    .pa-funnel__row--out .pa-funnel__track {
+        background: rgba(1, 69, 80, .18)
+    }
+
+    .pa-funnel__row--out .pa-funnel__fill {
+        background: #014550
+    }
+
+    /* ---------- Process rail: Target → Identify → Engage → Qualify → Convert → Optimize ---------- */
+    .pa-rail {
+        display: grid;
+        gap: 0;
+        grid-template-columns: 1fr
+    }
+
+    .pa-rail__step {
+        position: relative;
+        padding-left: 44px;
+        padding-bottom: 30px
+    }
+
+    .pa-rail__step:last-child {
+        padding-bottom: 0
+    }
+
+    .pa-rail__n {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 32px;
+        height: 32px;
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #014550;
+        color: #fff;
+        font: 700 11px/1 'Plus Jakarta Sans', sans-serif
+    }
+
+    .pa-rail__line {
+        position: absolute;
+        left: 15px;
+        top: 38px;
+        bottom: 4px;
+        width: 2px;
+        background: #e2e8f0
+    }
+
+    .pa-rail__step:last-child .pa-rail__line {
+        display: none
+    }
+
+    .pa-rail__title {
+        font: 700 17px/1.35 'Plus Jakarta Sans', sans-serif;
+        color: #0f172a;
+        margin-bottom: 6px
+    }
+
+    .pa-rail__body {
+        font: 400 14px/1.65 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    /* what each stage hands to the next one */
+    .pa-rail__out {
+        display: inline-block;
+        margin-top: 12px;
+        font: 700 10px/1.5 'Inter', sans-serif;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        color: #014550;
+        background: rgba(223, 255, 136, .35);
+        border: 1px solid rgba(223, 255, 136, .9);
+        border-radius: 9999px;
+        padding: 5px 10px
+    }
+
+    @media(min-width:768px) {
+        .pa-rail {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 26px 30px
+        }
+
+        .pa-rail__step {
+            padding-left: 0;
+            padding-bottom: 0
+        }
+
+        .pa-rail__line {
+            display: none
+        }
+    }
+
+    @media(min-width:1280px) {
+        .pa-rail {
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 26px 22px
+        }
+
+        .pa-rail__step {
+            padding-top: 46px
+        }
+
+        .pa-rail__n {
+            width: 34px;
+            height: 34px
+        }
+
+        .pa-rail__line {
+            display: block;
+            left: 40px;
+            top: 16px;
+            bottom: auto;
+            width: calc(100% - 14px);
+            height: 2px;
+            background: #e2e8f0
+        }
+
+        .pa-rail__step:last-child .pa-rail__line {
+            display: block;
+            background: linear-gradient(90deg, #014550, rgba(1, 69, 80, 0))
+        }
+    }
+
+    /* ---------- AI / operator split rows ---------- */
+    .pa-roles {
+        display: flex;
+        flex-direction: column;
+        gap: 9px;
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid #f1f5f9
+    }
+
+    .pa-role {
+        display: flex;
+        align-items: flex-start;
+        gap: 9px;
+        font: 400 12px/1.55 'Inter', sans-serif;
+        color: #64748b
+    }
+
+    .pa-role__tag {
+        flex-shrink: 0;
+        display: inline-block;
+        font: 700 9px/1 'Inter', sans-serif;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        padding: 5px 8px;
+        border-radius: 9999px;
+        white-space: nowrap
+    }
+
+    .pa-role__tag--ai {
+        background: rgba(223, 255, 136, .35);
+        color: #014550
+    }
+
+    .pa-role__tag--human {
+        background: rgba(1, 69, 80, .08);
+        color: #014550
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    .pa-chain__node {
+        transition: none
+    }
+}
